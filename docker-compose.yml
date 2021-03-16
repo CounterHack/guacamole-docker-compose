@@ -129,20 +129,21 @@ services:
       POSTGRES_HOSTNAME: postgres
       POSTGRES_PASSWORD: ChooseYourOwnPasswordHere1234
       POSTGRES_USER: guacamole_user
-    image: guacamole
+    image: guacamole/guacamole
     links:
     - guacd
     networks:
       guacnetwork_compose:
     ports:
 ## enable next line if not using nginx
-      - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
+      # - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
 ## enable next line when using nginx
-    # - 8080/tcp
+      - 8080/tcp
     restart: always
     volumes:
       - ./guacamole/start.sh:/opt/guacamole/bin/start.sh
-      - ./guacamole/logback.xml:/root/.guacamole/logback.xml
+      # - ./guacamole/logback.xml:/root/.guacamole/logback.xml
+      - ./guacamole:/guacamole
 
 ########### optional ##############
   # nginx
